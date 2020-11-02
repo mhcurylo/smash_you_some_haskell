@@ -1,0 +1,106 @@
+load(
+    "@rules_haskell//haskell:defs.bzl",
+    "haskell_binary",
+)
+load("@io_bazel_rules_docker//cc:image.bzl", "cc_image")
+
+haskell_binary(
+    name = "impl",
+    srcs = [
+        "impl/Main.hs",
+    ],
+    src_strip_prefix = "impl",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:criterion",
+        "@stackage//:random",
+        "@stackage//:vector",
+        "@stackage//:vector-algorithms",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+    ],
+)
+
+haskell_binary(
+    name = "merge",
+    srcs = [
+        "merge/Main.hs",
+    ],
+    src_strip_prefix = "merge",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:vector",
+        "@stackage//:vector-algorithms",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+    ],
+)
+
+haskell_binary(
+    name = "insertion",
+    srcs = [
+        "insertion/Main.hs",
+    ],
+    src_strip_prefix = "insertion",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:vector",
+        "@stackage//:vector-algorithms",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+    ],
+)
+
+haskell_binary(
+    name = "merge64",
+    srcs = [
+        "merge64/Main.hs",
+    ],
+    src_strip_prefix = "merge64",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:vector",
+        "@stackage//:vector-algorithms",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+    ],
+)
+
+haskell_binary(
+    name = "insertion64",
+    srcs = [
+        "insertion64/Main.hs",
+    ],
+    src_strip_prefix = "insertion64",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:vector",
+        "@stackage//:vector-algorithms",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+    ],
+)
+
+
+cc_image(
+    name = "impl-image",
+    binary = ":impl",
+)
+
+
+

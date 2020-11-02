@@ -1,0 +1,138 @@
+load(
+    "@rules_haskell//haskell:defs.bzl",
+    "haskell_binary",
+    "haskell_doc",
+    "haskell_library",
+    "haskell_repl",
+)
+load("@io_bazel_rules_docker//cc:image.bzl", "cc_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+
+haskell_binary(
+    name = "impl",
+    srcs = [
+        "impl/Main.hs",
+    ],
+    src_strip_prefix = "impl",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:servant",
+        "@stackage//:servant-server",
+        "@stackage//:postgresql-simple",
+        "@stackage//:wai",
+        "@stackage//:warp",
+        "@stackage//:bytestring",
+        "@stackage//:aeson",
+        "@stackage//:text",
+        "@stackage//:resource-pool",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+        "-XLambdaCase",
+        "-XDataKinds",
+        "-XOverloadedStrings",
+        "-XTypeOperators",
+        "-XBlockArguments",
+        "-XLambdaCase",
+        "-XDeriveGeneric",
+        "-XDeriveAnyClass",
+        "-rtsopts",
+    ],
+)
+
+haskell_binary(
+    name = "impl-threaded",
+    srcs = [
+        "impl/Main.hs",
+    ],
+    src_strip_prefix = "impl",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:servant",
+        "@stackage//:servant-server",
+        "@stackage//:postgresql-simple",
+        "@stackage//:wai",
+        "@stackage//:warp",
+        "@stackage//:bytestring",
+        "@stackage//:aeson",
+        "@stackage//:text",
+        "@stackage//:resource-pool",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+        "-XLambdaCase",
+        "-XDataKinds",
+        "-XOverloadedStrings",
+        "-XTypeOperators",
+        "-XBlockArguments",
+        "-XLambdaCase",
+        "-XDeriveGeneric",
+        "-XDeriveAnyClass",
+        "-rtsopts",
+        "-threaded",
+        "-with-rtsopts=-N",
+    ],
+)
+
+
+cc_image(
+    name = "impl-image",
+    binary = ":impl",
+)
+
+container_image(
+    name = "non-threaded",
+    base = "impl-image",
+    repository = "mhcurylo",
+    ports = ["8080"]
+)
+
+cc_image(
+    name = "impl-image-threaded",
+    binary = ":impl-threaded",
+)
+
+container_image(
+    name = "threaded",
+    base = "impl-image-threaded",
+    repository = "mhcurylo",
+    ports = ["8080"]
+)
+
+
+# A REPL target that allows running GHCi against both our library and binary
+# code. Note that you already get `@repl` targets on `haskell_library` and
+# `haskell_binary` (e.g. here you could run `bazel run
+# //example-service/impl@repl`) but the explicit `haskell_repl` rule can be
+# useful for targeting multiple things or, in this case, testing that the whole
+# shebang works nicely together. Moreover, this is the target we use to get
+# `ghcide` up and running against the whole codebase (which, granted, is tiny
+# here). See `.hie-bios` in the repository root for more information on this.
+haskell_repl(
+    name = "impl-ifc-repl",
+    experimental_from_source = [
+        ":ifc",
+        ":impl",
+    ],
+    deps = [
+        ":ifc",
+        ":impl",
+    ],
+)
+
+# A documentation target that generates Haddock documentation for the code in
+# this repository. You shouldn't have to do anything special here with regards
+# to static linking -- Haddock is an external tool separate to the compilation
+# process and is only interested in the source code.
+haskell_doc(
+    name = "impl-ifc-docs",
+    deps = [
+        ":ifc",
+        ":impl",
+    ],
+    index_transitive_deps = True,
+)
