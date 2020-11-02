@@ -2,4 +2,4 @@
 
 set -x
 
-watch kubectl get pods
+watch minikube kubectl -- get pods
