@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 echo "Reseting minikube for Smash you Some Haskell!"
 
 minikube delete
