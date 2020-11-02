@@ -1,0 +1,13 @@
+{
+  "name": "perf-nodejs-server",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "node.js",
+  "scripts": {
+    "start": "node node.js"
+  },
+  "dependencies": {
+    "fastify": "^3.6.0",
+    "pg": "^8.4.1"
+  }
+}

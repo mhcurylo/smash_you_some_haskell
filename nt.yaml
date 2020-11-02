@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haskell-fixture
+  labels:
+    app: hpf
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hpf
+  template:
+    metadata:
+      labels:
+        app: hpf
+    spec:
+      containers:
+      - name: haskell-fixture-threaded
+        image: mhc/haskell-fixture:non-threaded
+        imagePullPolicy: Never
+        resources:
+          requests:
+            cpu: "1000m"
+          limits:
+            cpu: "1000m"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PSQL_CONNECTIONS
+          value: "40"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: haskell-f
+spec:
+  type: LoadBalancer
+  selector:
+    app: hpf
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8080
+      nodePort: 30002
