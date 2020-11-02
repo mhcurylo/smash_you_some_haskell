@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-fixture
+  labels:
+    app: npf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: npf
+  template:
+    metadata:
+      labels:
+        app: npf
+    spec:
+      containers:
+      - name: node-fixture
+        image: mhcurylo/nodejs-fixture:js
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PSQL_CONNECTIONS
+          value: "80"
+
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-f
+spec:
+  type: LoadBalancer
+  selector:
+    app: npf
+  ports:
+    - protocol: TCP
+      port: 8082
+      targetPort: 3000
+      nodePort: 30009

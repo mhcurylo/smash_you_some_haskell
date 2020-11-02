@@ -5,7 +5,7 @@ metadata:
   labels:
     app: hpf
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: hpf
@@ -16,20 +16,20 @@ spec:
     spec:
       containers:
       - name: haskell-fixture-threaded
-        image: mhc/haskell-fixture:threaded
-        imagePullPolicy: Never
+        image: mhcurylo/haskell-fixture:threaded
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
-            cpu: 1
+            cpu: "2000m"
           limits:
-            cpu: 1
+            cpu: "2000m"
         ports:
         - containerPort: 8080
         env:
         - name: PSQL_CONNECTIONS
           value: "40"
         - name: GHCRTS
-          value: "-N1"
+          value: "-N2"
 
 ---
 

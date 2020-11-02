@@ -16,13 +16,8 @@ spec:
     spec:
       containers:
       - name: node-fixture
-        image: mhc/node-fixture:x
-        imagePullPolicy: Never
-        resources:
-          requests:
-            cpu: 1
-          limits:
-            cpu: 1
+        image: mhcurylo/nodejs-fixture:js
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
         env:
