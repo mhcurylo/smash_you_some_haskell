@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x
 
-echo "Deploying node pinned to cpu $1"
+PIN=$1
+PIN=${PIN:-11}
+echo "Deploying node pinned to cpu $PIN"
 
-docker run --cpus=1 --cpuset-cpus="$1" --net=host mhcurylo/nodejs-fixture:js
+docker run --cpus=1 --cpuset-cpus="$PIN" -e "PSQL_CONNECTIONS=80" --net=host mhcurylo/nodejs-fixture:js
