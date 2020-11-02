@@ -1,5 +1,4 @@
 ---
-
 title: Smash you some Haskell
 
 author: Mateusz Curylo
