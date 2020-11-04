@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo perf stat ./minirepo/bazel-bin/performance-demo/insertion
+sudo perf stat ./minirepo/bazel-bin/performance-demo/insertion100

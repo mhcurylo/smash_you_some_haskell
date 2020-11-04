@@ -76,12 +76,12 @@ At the end I want you to understand that:
 
   `Rationalism` - Parmenides - change is an illusion, world as the object of knowledge is eternal.
 
-  Rational domain - a domain which has one complete description.
 
   Platon, the ultimate source of modern rationalism:
 
   "If the world is not a rational domain, then we know nothing. Thus the world is rational."
 
+  Rational domain - a domain which has one complete description.
 
 ---
 
@@ -161,21 +161,19 @@ Worst case for insertion sort - reverse sorted order.
   O notatation /= operation count /= microbenchmark
 
 
-  It is a well-known fact in algorithm design (cache-oblivious algorithms, algorithm locality, introspective sorts, etc.).
+  It is known in algorithm design
+  (cache-oblivious algorithms, algorithm locality, introspective sorts, etc.).
 
   It has been talked about in the dev community.
 
 
 Data-Oriented Design (Game Programming / C++)
-
-  https://www.dataorienteddesign.com/dodbook/
-
-  Mike Acton speech https://www.youtube.com/watch?v=rX0ItVEVjHc
+  <https://www.dataorienteddesign.com/dodbook/>
+  Mike Acton speech <https://www.youtube.com/watch?v=rX0ItVEVjHc>
 
 
 Mechanical Sympathy (Java / LMAX Disruptor)
-
-  https://mechanical-sympathy.blogspot.com/
+  <https://mechanical-sympathy.blogspot.com/>
 
 
 
