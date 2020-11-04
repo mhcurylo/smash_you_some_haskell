@@ -10,14 +10,14 @@ import qualified Data.Vector.Unboxed.Mutable as MVector
 import Control.Monad
 import Data.Int
 
-vect :: Vector.Vector Int64
-vect = Vector.fromList $ reverse [-50..0]
+vect :: Vector.Vector Int8
+vect = Vector.fromList $ reverse [-49..50]
 
 main :: IO ()
 main = do
   forM_ [0..(10000 :: Int)] $ \_ -> copisort vect
 
-copisort :: Vector.Vector Int64 -> IO (MVector.IOVector Int64)
+copisort :: Vector.Vector Int8 -> IO (MVector.IOVector Int8)
 copisort = Vector.unsafeThaw . Vector.modify Insertion.sort
 
 

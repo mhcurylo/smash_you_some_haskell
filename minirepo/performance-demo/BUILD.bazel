@@ -61,11 +61,11 @@ haskell_binary(
 )
 
 haskell_binary(
-    name = "merge64",
+    name = "merge100",
     srcs = [
-        "merge64/Main.hs",
+        "merge100/Main.hs",
     ],
-    src_strip_prefix = "merge64",
+    src_strip_prefix = "merge100",
     deps = [
         "@stackage//:base",
         "@stackage//:vector",
@@ -79,11 +79,11 @@ haskell_binary(
 )
 
 haskell_binary(
-    name = "insertion64",
+    name = "insertion100",
     srcs = [
-        "insertion64/Main.hs",
+        "insertion100/Main.hs",
     ],
-    src_strip_prefix = "insertion64",
+    src_strip_prefix = "insertion100",
     deps = [
         "@stackage//:base",
         "@stackage//:vector",
@@ -95,6 +95,83 @@ haskell_binary(
         "-Werror",
     ],
 )
+
+
+haskell_binary(
+    name = "merge150",
+    srcs = [
+        "merge150/Main.hs",
+    ],
+    src_strip_prefix = "merge150",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:vector",
+        "@stackage//:vector-algorithms",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+    ],
+)
+
+haskell_binary(
+    name = "insertion150",
+    srcs = [
+        "insertion150/Main.hs",
+    ],
+    src_strip_prefix = "insertion150",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:vector",
+        "@stackage//:vector-algorithms",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+    ],
+)
+
+
+haskell_binary(
+    name = "merge200",
+    srcs = [
+        "merge200/Main.hs",
+    ],
+    src_strip_prefix = "merge200",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:vector",
+        "@stackage//:vector-algorithms",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+    ],
+)
+
+haskell_binary(
+    name = "insertion200",
+    srcs = [
+        "insertion200/Main.hs",
+    ],
+    src_strip_prefix = "insertion200",
+    deps = [
+        "@stackage//:base",
+        "@stackage//:vector",
+        "@stackage//:vector-algorithms",
+    ],
+    compiler_flags = [
+        "-optl-static",
+        "-Wall",
+        "-Werror",
+    ],
+)
+
+
+
 
 
 cc_image(

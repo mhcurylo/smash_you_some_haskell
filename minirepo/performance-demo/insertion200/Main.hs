@@ -4,20 +4,20 @@
 
 module Main (main) where
 
-import qualified Data.Vector.Algorithms.Merge as Merge
+import qualified Data.Vector.Algorithms.Insertion as Insertion
 import qualified Data.Vector.Unboxed as Vector
 import qualified Data.Vector.Unboxed.Mutable as MVector
 import Control.Monad
 import Data.Int
 
 vect :: Vector.Vector Int8
-vect = Vector.fromList $ reverse [-24..25]
+vect = Vector.fromList $ reverse [-100..99]
 
 main :: IO ()
 main = do
   forM_ [0..(10000::Int)] $ \_ -> copisort vect
 
 copisort :: Vector.Vector Int8 -> IO (MVector.IOVector Int8)
-copisort = Vector.unsafeThaw . Vector.modify Merge.sort
+copisort = Vector.unsafeThaw . Vector.modify Insertion.sort
 
 

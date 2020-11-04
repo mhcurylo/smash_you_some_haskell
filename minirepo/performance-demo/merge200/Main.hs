@@ -11,11 +11,11 @@ import Control.Monad
 import Data.Int
 
 vect :: Vector.Vector Int8
-vect = Vector.fromList $ reverse [-24..25]
+vect = Vector.fromList $ reverse [-99..100]
 
 main :: IO ()
 main = do
-  forM_ [0..(10000::Int)] $ \_ -> copisort vect
+  forM_ [0..(10000 :: Int)] $ \_ -> copisort vect
 
 copisort :: Vector.Vector Int8 -> IO (MVector.IOVector Int8)
 copisort = Vector.unsafeThaw . Vector.modify Merge.sort
